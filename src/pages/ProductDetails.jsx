@@ -42,9 +42,9 @@ const ProductDetails = () => {
     return stars;
   };
 
-  // Calculate total price based on quantity
   const totalPrice = product.price * quantity;
 
+  // ===== ADD TO CART HANDLER =====
   const handleAddToCart = () => {
     addToCart(product, quantity);
   };
@@ -142,7 +142,7 @@ const ProductDetails = () => {
                   <span className="text-2xl font-bold text-yellow-400">${totalPrice.toFixed(2)}</span>
                 </div>
                 
-                {/* Add to Cart Button */}
+                {/* ===== ADD TO CART BUTTON ===== */}
                 <button 
                   onClick={handleAddToCart}
                   disabled={product.stock === 0}

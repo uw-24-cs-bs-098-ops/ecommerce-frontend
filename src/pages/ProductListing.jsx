@@ -13,6 +13,7 @@ const ProductListing = () => {
   const [sortBy, setSortBy] = useState('featured');
   const { addToCart } = useCart();
 
+  // Load all products
   useEffect(() => {
     const allProducts = productData.products;
     setProducts(allProducts);
@@ -21,6 +22,7 @@ const ProductListing = () => {
     setCategories(uniqueCategories);
   }, []);
 
+  // Filter and sort products
   useEffect(() => {
     let result = products;
     if (searchTerm) {
@@ -39,6 +41,7 @@ const ProductListing = () => {
     setFilteredProducts(result);
   }, [searchTerm, selectedCategory, sortBy, products]);
 
+  // Render stars
   const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -55,57 +58,16 @@ const ProductListing = () => {
     return stars;
   };
 
-  // Category icons
-  const categoryIcons = {
-    'Electronics': '📱',
-    'Clothing': '👕',
-    'Shoes': '👟',
-    'Books': '📚',
-    'Gaming': '🎮',
-    'Accessories': '💎'
-  };
-
-  const categoryColors = {
-    'Electronics': 'from-blue-500 to-cyan-500',
-    'Clothing': 'from-purple-500 to-pink-500',
-    'Shoes': 'from-green-500 to-emerald-500',
-    'Books': 'from-orange-500 to-red-500',
-    'Gaming': 'from-indigo-500 to-purple-500',
-    'Accessories': 'from-pink-500 to-rose-500'
+  // ===== ADD TO CART HANDLER =====
+  const handleAddToCart = (product) => {
+    addToCart(product, 1);
   };
 
   return (
     <div className="bg-[#0a0a1a] min-h-screen py-8">
       <div className="container mx-auto px-4">
         
-        {/* ===== CATEGORIES SECTION ===== */}
-        <div className="mb-8">
-          <h2 className="text-xl font-bold text-white mb-4">📂 Shop by Category</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(selectedCategory === category ? '' : category)}
-                className={`bg-gradient-to-br ${categoryColors[category] || 'from-gray-600 to-gray-700'} rounded-xl p-4 text-center text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${
-                  selectedCategory === category ? 'ring-2 ring-white ring-offset-2 ring-offset-[#0a0a1a]' : ''
-                }`}
-              >
-                <div className="text-2xl mb-1">{categoryIcons[category] || '📦'}</div>
-                <span className="text-xs font-semibold">{category}</span>
-              </button>
-            ))}
-          </div>
-          {selectedCategory && (
-            <button
-              onClick={() => setSelectedCategory('')}
-              className="mt-3 text-indigo-400 hover:text-indigo-300 text-sm font-medium"
-            >
-              Clear Filter ✕
-            </button>
-          )}
-        </div>
-
-        {/* ===== HEADER ===== */}
+        {/* Header */}
         <div className="flex items-center gap-4 mb-6">
           <Link to="/" className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1 text-sm font-medium transition">
             <FaArrowLeft /> Back to Home
@@ -115,7 +77,7 @@ const ProductListing = () => {
           </h1>
         </div>
 
-        {/* ===== SEARCH & FILTER ===== */}
+        {/* Search & Filters */}
         <div className="bg-[#111827] border border-[#1f2937] rounded-2xl p-4 mb-6">
           <div className="flex flex-col md:flex-row gap-3">
             <input
@@ -146,15 +108,17 @@ const ProductListing = () => {
           </div>
         </div>
 
-        {/* ===== RESULTS COUNT ===== */}
+        {/* Results Count */}
         <div className="text-sm text-gray-400 mb-4">
           {filteredProducts.length} products found
         </div>
 
-        {/* ===== PRODUCT GRID ===== */}
+        {/* Products Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
             <div key={product.id} className="bg-[#111827] border border-[#1f2937] rounded-2xl overflow-hidden hover:border-indigo-500 transition-all duration-300 hover:-translate-y-2">
+              
+              {/* Product Image */}
               <Link to={`/product/${product.id}`}>
                 <img 
                   src={product.image} 
@@ -162,6 +126,8 @@ const ProductListing = () => {
                   className="w-full h-48 object-cover hover:scale-105 transition duration-500" 
                 />
               </Link>
+              
+              {/* Product Info */}
               <div className="p-4">
                 <div className="text-xs text-indigo-400 font-medium bg-indigo-900/30 inline-block px-2 py-0.5 rounded-full">
                   {product.category}
@@ -177,8 +143,10 @@ const ProductListing = () => {
                 </div>
                 <div className="flex items-center justify-between mt-2">
                   <span className="text-lg font-bold text-yellow-400">${product.price.toFixed(2)}</span>
+                  
+                  {/* ===== ADD TO CART BUTTON ===== */}
                   <button 
-                    onClick={() => addToCart(product)}
+                    onClick={() => handleAddToCart(product)}
                     className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs py-1.5 px-3 rounded-lg hover:shadow-lg transition-all hover:scale-105"
                   >
                     Add to Cart
@@ -189,7 +157,7 @@ const ProductListing = () => {
           ))}
         </div>
 
-        {/* ===== GO TO CART ===== */}
+        {/* Go to Cart Button */}
         <div className="text-center mt-10">
           <Link 
             to="/cart" 
