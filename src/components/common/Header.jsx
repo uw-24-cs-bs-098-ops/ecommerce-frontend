@@ -8,22 +8,17 @@ const Header = () => {
 
   return (
     <header className="bg-[#0a0a1a] border-b border-[#1f2937] sticky top-0 z-50">
-      {/* Top Bar */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-2 gap-2">
           
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-[#111827] transition">
             <span className="text-2xl font-bold text-yellow-400">🛍️</span>
             <div>
               <span className="text-[10px] block leading-none text-gray-400">Shop</span>
-              <span className="text-xl font-bold block leading-none tracking-wide bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                Ease
-              </span>
+              <span className="text-xl font-bold block leading-none tracking-wide gradient-text">Ease</span>
             </div>
           </Link>
 
-          {/* Delivery */}
           <div className="hidden lg:flex items-center gap-1 px-3 py-1 rounded-lg hover:bg-[#111827] transition cursor-pointer">
             <FaMapMarkerAlt className="text-yellow-400 text-sm" />
             <div>
@@ -32,7 +27,6 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Search Bar */}
           <div className="flex-1 max-w-2xl mx-3">
             <div className="flex items-center bg-[#111827] border border-[#1f2937] rounded-xl overflow-hidden focus-within:border-indigo-500 transition">
               <select className="bg-[#111827] text-gray-300 text-sm px-3 py-2 border-r border-[#1f2937] focus:outline-none hidden sm:block">
@@ -52,7 +46,6 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Right Nav */}
           <div className="flex items-center gap-2">
             <div className="hidden md:block px-3 py-1 rounded-lg hover:bg-[#111827] transition cursor-pointer">
               <span className="text-[10px] text-gray-400 block leading-none">Hello, Guest</span>
@@ -64,22 +57,17 @@ const Header = () => {
               <span className="text-sm font-bold block leading-none text-white">& Orders</span>
             </div>
 
-            {/* ===== CART ICON WITH BADGE ===== */}
             <Link to="/cart" className="flex items-center gap-1 px-3 py-1 rounded-lg hover:bg-[#111827] transition relative">
               <FaShoppingCart className="text-2xl text-white" />
-              
-              {/* Cart Badge - Shows total items */}
               <span className={`absolute -top-1 left-5 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ${itemCount > 0 ? 'animate-pulse' : ''}`}>
                 {itemCount}
               </span>
-              
               <span className="text-sm font-bold text-white hidden sm:block">Cart</span>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Bottom Nav */}
       <div className="bg-[#0f0f1f] border-t border-[#1f2937]">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-4 py-1.5 text-sm overflow-x-auto">

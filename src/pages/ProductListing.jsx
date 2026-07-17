@@ -13,7 +13,6 @@ const ProductListing = () => {
   const [sortBy, setSortBy] = useState('featured');
   const { addToCart } = useCart();
 
-  // Load all products
   useEffect(() => {
     const allProducts = productData.products;
     setProducts(allProducts);
@@ -22,7 +21,6 @@ const ProductListing = () => {
     setCategories(uniqueCategories);
   }, []);
 
-  // Filter and sort products
   useEffect(() => {
     let result = products;
     if (searchTerm) {
@@ -41,7 +39,6 @@ const ProductListing = () => {
     setFilteredProducts(result);
   }, [searchTerm, selectedCategory, sortBy, products]);
 
-  // Render stars
   const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -58,26 +55,17 @@ const ProductListing = () => {
     return stars;
   };
 
-  // ===== ADD TO CART HANDLER =====
-  const handleAddToCart = (product) => {
-    addToCart(product, 1);
-  };
-
   return (
     <div className="bg-[#0a0a1a] min-h-screen py-8">
       <div className="container mx-auto px-4">
         
-        {/* Header */}
         <div className="flex items-center gap-4 mb-6">
           <Link to="/" className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1 text-sm font-medium transition">
             <FaArrowLeft /> Back to Home
           </Link>
-          <h1 className="text-2xl font-bold text-white flex-1 text-center">
-            All Products
-          </h1>
+          <h1 className="text-2xl font-bold text-white flex-1 text-center">All Products</h1>
         </div>
 
-        {/* Search & Filters */}
         <div className="bg-[#111827] border border-[#1f2937] rounded-2xl p-4 mb-6">
           <div className="flex flex-col md:flex-row gap-3">
             <input
@@ -108,26 +96,14 @@ const ProductListing = () => {
           </div>
         </div>
 
-        {/* Results Count */}
-        <div className="text-sm text-gray-400 mb-4">
-          {filteredProducts.length} products found
-        </div>
+        <div className="text-sm text-gray-400 mb-4">{filteredProducts.length} products found</div>
 
-        {/* Products Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
             <div key={product.id} className="bg-[#111827] border border-[#1f2937] rounded-2xl overflow-hidden hover:border-indigo-500 transition-all duration-300 hover:-translate-y-2">
-              
-              {/* Product Image */}
               <Link to={`/product/${product.id}`}>
-                <img 
-                  src={product.image} 
-                  alt={product.name} 
-                  className="w-full h-48 object-cover hover:scale-105 transition duration-500" 
-                />
+                <img src={product.image} alt={product.name} className="w-full h-48 object-cover hover:scale-105 transition duration-500" />
               </Link>
-              
-              {/* Product Info */}
               <div className="p-4">
                 <div className="text-xs text-indigo-400 font-medium bg-indigo-900/30 inline-block px-2 py-0.5 rounded-full">
                   {product.category}
@@ -143,10 +119,8 @@ const ProductListing = () => {
                 </div>
                 <div className="flex items-center justify-between mt-2">
                   <span className="text-lg font-bold text-yellow-400">${product.price.toFixed(2)}</span>
-                  
-                  {/* ===== ADD TO CART BUTTON ===== */}
                   <button 
-                    onClick={() => handleAddToCart(product)}
+                    onClick={() => addToCart(product)}
                     className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs py-1.5 px-3 rounded-lg hover:shadow-lg transition-all hover:scale-105"
                   >
                     Add to Cart
@@ -157,12 +131,8 @@ const ProductListing = () => {
           ))}
         </div>
 
-        {/* Go to Cart Button */}
         <div className="text-center mt-10">
-          <Link 
-            to="/cart" 
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-8 py-3 rounded-xl font-bold hover:shadow-2xl transition-all hover:scale-105"
-          >
+          <Link to="/cart" className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-8 py-3 rounded-xl font-bold hover:shadow-2xl transition-all hover:scale-105">
             🛒 Go to Cart
           </Link>
         </div>

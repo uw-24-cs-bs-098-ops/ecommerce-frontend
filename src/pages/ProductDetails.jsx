@@ -44,62 +44,32 @@ const ProductDetails = () => {
 
   const totalPrice = product.price * quantity;
 
-  // ===== ADD TO CART HANDLER =====
-  const handleAddToCart = () => {
-    addToCart(product, quantity);
-  };
-
   return (
     <div className="bg-[#0a0a1a] min-h-screen py-8">
       <div className="container mx-auto px-4">
-        {/* Back Button */}
         <Link to="/products" className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1 text-sm font-medium mb-6 transition">
           <FaArrowLeft /> Back to Products
         </Link>
         
-        {/* Product Details */}
         <div className="bg-[#111827] border border-[#1f2937] rounded-2xl p-6 md:p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            {/* Product Image */}
             <div className="bg-[#0f1729] rounded-xl overflow-hidden">
-              <img 
-                src={product.image} 
-                alt={product.name} 
-                className="w-full h-80 md:h-96 object-cover hover:scale-105 transition duration-500" 
-              />
+              <img src={product.image} alt={product.name} className="w-full h-80 md:h-96 object-cover hover:scale-105 transition duration-500" />
             </div>
-            
-            {/* Product Info */}
             <div className="flex flex-col justify-between">
               <div>
-                {/* Category */}
                 <div className="text-sm text-indigo-400 font-medium bg-indigo-900/30 inline-block px-3 py-1 rounded-full">
                   {product.category}
                 </div>
-                
-                {/* Title */}
-                <h1 className="text-2xl md:text-3xl font-bold text-white mt-3">
-                  {product.name}
-                </h1>
-                
-                {/* Rating */}
+                <h1 className="text-2xl md:text-3xl font-bold text-white mt-3">{product.name}</h1>
                 <div className="flex items-center gap-2 mt-2">
                   {renderStars(product.rating || 4.5)}
                   <span className="text-sm text-gray-400">({product.reviews || 128} reviews)</span>
                 </div>
-                
-                {/* Price */}
                 <div className="mt-4">
                   <span className="text-3xl font-bold text-yellow-400">${product.price.toFixed(2)}</span>
                 </div>
-                
-                {/* Description */}
-                <p className="text-gray-300 mt-4 leading-relaxed">
-                  {product.description}
-                </p>
-                
-                {/* Stock Status */}
+                <p className="text-gray-300 mt-4 leading-relaxed">{product.description}</p>
                 <div className="mt-4">
                   {product.stock > 0 ? (
                     <span className="inline-flex items-center gap-2 bg-green-900/30 text-green-400 px-4 py-2 rounded-xl text-sm font-medium">
@@ -113,48 +83,30 @@ const ProductDetails = () => {
                   )}
                 </div>
               </div>
-              
-              {/* Add to Cart Section */}
               <div className="border-t border-[#1f2937] pt-6 mt-6">
-                {/* Quantity Selector */}
                 <div className="flex items-center gap-4 mb-4">
                   <label className="font-medium text-white">Quantity:</label>
                   <div className="flex items-center gap-3 bg-[#0a0a1a] border border-[#1f2937] rounded-xl px-3 py-1">
-                    <button 
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-8 h-8 rounded-lg hover:bg-[#1f2937] text-white transition flex items-center justify-center"
-                    >
+                    <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-8 h-8 rounded-lg hover:bg-[#1f2937] text-white transition flex items-center justify-center">
                       <FaMinus className="text-xs" />
                     </button>
                     <span className="w-10 text-center font-bold text-white text-lg">{quantity}</span>
-                    <button 
-                      onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                      className="w-8 h-8 rounded-lg hover:bg-[#1f2937] text-white transition flex items-center justify-center"
-                    >
+                    <button onClick={() => setQuantity(Math.min(product.stock, quantity + 1))} className="w-8 h-8 rounded-lg hover:bg-[#1f2937] text-white transition flex items-center justify-center">
                       <FaPlus className="text-xs" />
                     </button>
                   </div>
                 </div>
-
-                {/* Total Price */}
                 <div className="flex items-center justify-between bg-[#0a0a1a] rounded-xl px-4 py-3 mb-4 border border-[#1f2937]">
                   <span className="text-gray-400">Total:</span>
                   <span className="text-2xl font-bold text-yellow-400">${totalPrice.toFixed(2)}</span>
                 </div>
-                
-                {/* ===== ADD TO CART BUTTON ===== */}
                 <button 
-                  onClick={handleAddToCart}
+                  onClick={() => addToCart(product, quantity)}
                   disabled={product.stock === 0}
-                  className={`w-full py-3.5 rounded-xl font-bold text-center transition-all duration-300 ${
-                    product.stock > 0 
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg hover:scale-[1.02]' 
-                      : 'bg-[#1f2937] text-gray-500 cursor-not-allowed'
-                  }`}
+                  className={`w-full py-3.5 rounded-xl font-bold text-center transition-all duration-300 ${product.stock > 0 ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg hover:scale-[1.02]' : 'bg-[#1f2937] text-gray-500 cursor-not-allowed'}`}
                 >
                   {product.stock > 0 ? `🛒 Add to Cart ($${totalPrice.toFixed(2)})` : 'Out of Stock'}
                 </button>
-                
                 <p className="text-xs text-gray-500 mt-3 text-center">
                   {product.stock > 0 ? '✓ Secure checkout • Free shipping on orders $50+' : '🚫 This product is currently unavailable'}
                 </p>
