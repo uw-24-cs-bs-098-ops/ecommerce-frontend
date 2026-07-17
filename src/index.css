@@ -15,9 +15,154 @@
     color: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 }
 
+/* ===== RESPONSIVE CONTAINER ===== */
+.container-custom {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== LAPTOP STYLES (1024px and above) ===== */
+@media (min-width: 1024px) {
+  .container-custom {
+    max-width: 1200px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  /* Laptop: 2 columns */
+  .grid-laptop-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  /* Laptop: 4 columns */
+  .grid-laptop-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  
+  /* Laptop: 6 columns */
+  .grid-laptop-6 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+  }
+  
+  /* Laptop: Large padding */
+  .padding-laptop {
+    padding: 3rem 0;
+  }
+  
+  /* Laptop: Large text */
+  .text-laptop-xl {
+    font-size: 3.5rem;
+  }
+  
+  /* Laptop: Show on laptop only */
+  .show-laptop {
+    display: block;
+  }
+  
+  .hide-laptop {
+    display: none;
+  }
+}
+
+/* ===== MOBILE STYLES (640px and below) ===== */
+@media (max-width: 640px) {
+  .container-custom {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Mobile: 1 column */
+  .grid-mobile-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  /* Mobile: 2 columns */
+  .grid-mobile-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  
+  /* Mobile: Small padding */
+  .padding-mobile {
+    padding: 1.5rem 0;
+  }
+  
+  /* Mobile: Small text */
+  .text-mobile-sm {
+    font-size: 0.875rem;
+  }
+  
+  .text-mobile-xl {
+    font-size: 1.75rem;
+  }
+  
+  /* Mobile: Full width */
+  .w-full-mobile {
+    width: 100%;
+  }
+  
+  /* Mobile: Stack flex */
+  .flex-mobile-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  /* Mobile: Center text */
+  .text-center-mobile {
+    text-align: center;
+  }
+  
+  /* Mobile: Show on mobile only */
+  .show-mobile {
+    display: block;
+  }
+  
+  .hide-mobile {
+    display: none;
+  }
+}
+
+/* ===== TABLET STYLES (641px to 1023px) ===== */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .container-custom {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  /* Tablet: 2 columns */
+  .grid-tablet-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  
+  /* Tablet: 3 columns */
+  .grid-tablet-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* ===== CARD STYLES ===== */
 .card-dark {
   background: linear-gradient(145deg, #111827, #0f1729);
   border: 1px solid #1f2937;
@@ -31,6 +176,7 @@
   box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
 }
 
+/* ===== BUTTONS ===== */
 .btn-primary {
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
@@ -70,6 +216,7 @@
   background-clip: text;
 }
 
+/* ===== ANIMATIONS ===== */
 @keyframes pulse-slow {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.05); opacity: 0.8; }
@@ -97,6 +244,7 @@
   animation: fadeIn 0.6s ease-out forwards;
 }
 
+/* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
   width: 8px;
 }
